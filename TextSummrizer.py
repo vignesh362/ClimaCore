@@ -4,11 +4,6 @@ def summarize_text(text,prompt_type):
     try:
         url = "http://127.0.0.1:1234/v1/completions"  # Update with LLaMA 3.2 endpoint
         headers = {"Content-Type": "application/json"}
-        prompt3 = (
-            "Based on the provided data, rate the suitability for constructing a solar farm out of 100. "
-            "Provide only the numerical result as output:\n\n"
-            f"{text}"
-        )
         prompt2 = (
             "Summarize the following text on the process to obtain approvals for a renewable energy farm in "
             "the specified state, focusing on key tips, relevant rules and regulations, and best practices to "
@@ -38,10 +33,10 @@ def summarize_text(text,prompt_type):
         #     f"{text}"
         # )
 
-        print("final prompt: ",prompt3 )
+        print("final prompt: ",prompt1 if prompt_type==1 else prompt2 )
         payload = {
             "model": "meta-llama-3.1-8b-instruct",
-            "prompt": prompt3,#prompt1 if prompt_type==1 else prompt2,
+            "prompt": prompt1 if prompt_type==1 else prompt2,
             "max_tokens": 100,  # Adjust for desired length
             "temperature": 0.7  # Controls creativity
         }
